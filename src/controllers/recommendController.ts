@@ -1,14 +1,19 @@
 import { Request, Response } from "express";
+import { buscarDestinos } from "../services/retrievalService";
+import { generarRecomendacion } from "../services/openaiService";
 
-export const handleRecommendation = (req: Request, res: Response) => {
-  const userInput = req.body;
+export const handleRecommendation = async (req: Request, res: Response) => {
+  const { mensaje } = req.body;
+  if (!mensaje) {
+    res.status(400).json({ error: "Falta 'mensaje' en el body." });
+    return;
+  }
 
-  // 👇 Lógica temporal del MVP
-  console.log("Consulta recibida:", userInput);
-  res.json({
-    message: "Recomendación recibida correctamente (falta lógica real)",
-    destinoSugerido: "Bocas del Toro",
-  });
-  res.status(200);
+  const resultados = await buscarDestinos(mensaje);
+  const textos = resultados.map((doc) => doc.pageContent);
+
+  const respuesta = await generarRecomendacion(mensaje, textos);
+
+  res.json({ respuesta });
   return;
 };

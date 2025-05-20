@@ -2,6 +2,17 @@
 POST http://localhost:3000/api/recommend
 Content-Type: application/json
 
+# Opción 1: Viaje en pareja a un lugar cálido
+# {
+#   "mensaje": "Quiero viajar con mi pareja en febrero a un lugar cálido con playa, no muy caro y tranquilo"
+# }
+
+# Opción 2: Viaje familiar a un lugar frío
 {
-  "userInput": "Quiero viajar a un lugar cálido"
+  "mensaje": "Busco un destino para viajar con mi familia (personas) en agosto a un lugar frío con actividades de nieve"
 }
+
+# Opción 3: Viaje de aventura
+# {
+#   "mensaje": "Quiero un viaje de aventura en la montaña para practicar senderismo y escalada"
+# }

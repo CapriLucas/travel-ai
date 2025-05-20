@@ -6,4 +6,18 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+    depends_on:
+      - chromadb
+    env_file:
+      - .env
     command: npm run dev
+  chromadb:
+    image: chromadb/chroma
+    ports:
+      - "8000:8000"
+    environment:
+      IS_PERSISTENT: "TRUE"
+      ANONYMIZED_TELEMETRY: "FALSE"
+      CHROMA_SERVER_CORS_ALLOW_ORIGINS: "*" # o especificá dominios seguros
+    volumes:
+      - ./chroma-data:/chroma/chroma

@@ -1,0 +1,7 @@
+### Probar la ruta de recomendaciones
+POST http://localhost:3000/api/recommend
+Content-Type: application/json
+
+{
+  "userInput": "Quiero viajar a un lugar cálido"
+}
